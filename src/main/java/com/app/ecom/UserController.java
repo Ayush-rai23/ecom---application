@@ -26,19 +26,24 @@ public class UserController {
 
     @GetMapping("/api/users/{id}")
     public User getUser(@PathVariable Long id) {
-        User user = userService.fetchUser(id);
-        if (user == null) {
-            return new User(); // returns empty user object instead of null
-        }
-        return user;
+        return userService.fetchUser(id)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build()).getBody();
     }
 
 
-
-
     @PostMapping("/api/users")
-    public String createUser(@RequestBody User user) {
+    public ResponseEntity<String> createUser(@RequestBody User user) {
         userService.addUser(user);
-        return "User added Successfully";
+        return ResponseEntity.ok("User added Successfully");
+    }
+
+
+    @PutMapping ("/api/users/{id}")
+    public ResponseEntity<String> updateUser(@PathVariable Long id,@RequestBody User updatedUser) {
+        boolean updated = userService.updateUser(id,updatedUser);
+        if(updated)
+            return ResponseEntity.ok("User updated successfuly");
+        return ResponseEntity.notFound().build();
     }
 }
