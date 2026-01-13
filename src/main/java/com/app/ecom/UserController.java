@@ -19,6 +19,7 @@ public class UserController {
     }
 
     @GetMapping("/api/users")
+    //@RequestMapping(value = "/api/users" , method = RequestMethod.GET)//It will work same as Get mapping.It is at method level
     public ResponseEntity<List<User>> getAllUsers() {
         return new ResponseEntity<>(userService.fetchAllUsers(),HttpStatus.OK);//this is the first one
         //There are two ways to do it this is the second one //return ResponseEntity.ok(userService.fetchAllUsers());
