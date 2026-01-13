@@ -11,8 +11,8 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 //@AllArgsConstructor
-//@Entity(name = "user_table")//This is telling that this class is now an entity
-@Entity
+@Entity(name = "user_table")//This is telling that this class is now an entity
+
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

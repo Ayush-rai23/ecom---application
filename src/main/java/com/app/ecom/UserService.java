@@ -11,11 +11,9 @@ import java.util.Optional;
 public class UserService {
     private final UserRepository userRepository;
     //private final List<User> userList = new ArrayList<User>();
-    private Long nextId = 1L;
+    //private Long nextId = 1L;
 
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+
 
     public List<User> fetchAllUsers() {
         return userRepository.findAll();
