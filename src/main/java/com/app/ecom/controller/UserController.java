@@ -1,7 +1,7 @@
-package com.app.ecom;
+package com.app.ecom.controller;
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.boot.autoconfigure.graphql.GraphQlProperties;
+import com.app.ecom.model.User;
+import com.app.ecom.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
