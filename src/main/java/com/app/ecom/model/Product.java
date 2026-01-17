@@ -24,6 +24,16 @@ public class Product {
     private BigDecimal price;
     private Integer stockQuantity;
     private String category;
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    private String imageUrl;
     private Boolean  active = true;
 
     @CreationTimestamp
