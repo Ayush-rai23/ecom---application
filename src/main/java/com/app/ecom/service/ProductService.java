@@ -7,6 +7,8 @@ import com.app.ecom.model.Product;
 import com.app.ecom.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class ProductService {
 
@@ -44,4 +46,12 @@ public class ProductService {
         product.setImageUrl(productRequest.getImageUrl());
     }
 
+    public Optional<ProductResponse> updateProduct(Long id, ProductRequest productRequest) {
+        return productRepository.findById(id)
+                .map(existingProduct -> {
+                    updateProductFromRequest(existingProduct, productRequest);
+                    Product savedProduct = productRepository.save(existingProduct);
+                    return mapToProductResponse(savedProduct);
+                });
+    }
 }
