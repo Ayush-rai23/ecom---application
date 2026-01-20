@@ -40,9 +40,9 @@ public class ProductController {
     }
 
     @DeleteMapping
-    public ResponseEntity<Void> createProduct(@PathVariable Long id){
-        productService.deleteProduct(id);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<Void> deleteProduct(@PathVariable Long id){
+            boolean  deleted = productService.deleteProduct(id);
+            return deleted ? ResponseEntity.noContent().build(): ResponseEntity.notFound().build();
     }
 
 }

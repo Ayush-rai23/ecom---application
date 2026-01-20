@@ -63,10 +63,13 @@ public class ProductService {
                 .collect(Collectors.toList());
     }
 
-    public void deleteProduct(Long id) {
-        Product product = productRepository.findById(id)
-                .orElseThrow(()-> new RuntimeException("Product not found"));
-                product.setActive(false);
-                productRepository.save(product);
+    public boolean deleteProduct(Long id) {
+        return productRepository.findById(id)
+                .map(product -> {
+                    product.setActive(false);
+                    productRepository.save(product);
+                    return true;
+
+                }).orElse(false);
     }
 }
