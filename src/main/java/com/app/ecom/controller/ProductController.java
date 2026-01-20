@@ -45,4 +45,9 @@ public class ProductController {
             return deleted ? ResponseEntity.noContent().build(): ResponseEntity.notFound().build();
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<List<ProductResponse>> seearchProduct(@RequestParam String keyword){
+        return ResponseEntity.ok(productService.searchProducts(keyword));
+    }
+
 }
