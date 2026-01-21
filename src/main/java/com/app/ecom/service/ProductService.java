@@ -75,6 +75,8 @@ public class ProductService {
 
     public List<ProductResponse> searchProducts(String keyword) {
         return productRepository.searchProducts(keyword).stream()
+                .map(this::mapToProductResponse)
+                .collect(Collectors.toList());
 
     }
 }
