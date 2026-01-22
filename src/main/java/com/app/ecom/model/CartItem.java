@@ -1,6 +1,5 @@
 package com.app.ecom.model;
 
-
 import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
@@ -10,6 +9,12 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
+@Table(
+        name = "cart_items",
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = {"user_id", "product_id"})
+        }
+)
 @Data
 public class CartItem {
 
@@ -22,11 +27,14 @@ public class CartItem {
     private User user;
 
     @ManyToOne
-    @JoinColumn(name ="product_id", nullable = false)
+    @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 
-    private Integer quantity;
-    private BigDecimal price;
+    @Column(nullable = false)
+    private Integer quantity = 0;
+
+    @Column(nullable = false, precision = 10, scale = 2)
+    private BigDecimal price = BigDecimal.ZERO;
 
     @CreationTimestamp
     private LocalDateTime createdAt;
