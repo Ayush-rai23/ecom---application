@@ -9,12 +9,6 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(
-        name = "cart_items",
-        uniqueConstraints = {
-                @UniqueConstraint(columnNames = {"user_id", "product_id"})
-        }
-)
 @Data
 public class CartItem {
 
@@ -30,10 +24,10 @@ public class CartItem {
     @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 
-    @Column(nullable = false)
+
     private Integer quantity = 0;
 
-    @Column(nullable = false, precision = 10, scale = 2)
+
     private BigDecimal price = BigDecimal.ZERO;
 
     @CreationTimestamp
