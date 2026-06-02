@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -23,9 +24,15 @@ public class CartService {
     private final CartItemRepository cartItemRepository;
     private final UserRepository userRepository;
 
+    public List<CartItem> getCart(String userId) {
+        return userRepository.findById(Long.valueOf(userId))
+                .map(cartItemRepository::findByUser)
+                .orElseGet(List::of);
+    }
+
     public boolean addToCart(String userId, CartItemRequest request) {
 
-        Long uid;
+        long uid;
         try {
             uid = Long.parseLong(userId);
         } catch (NumberFormatException e) {
@@ -86,7 +93,7 @@ public class CartService {
 
     public boolean deleteItemFromCart(String userId, Long productId) {
 
-        Long uid;
+        long uid;
         try {
             uid = Long.parseLong(userId);
         } catch (NumberFormatException e) {
